@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "PokemonGB";
+}
+
+@font-face {
+  font-family: "PokemonGB";
+  src: local("PokemonGB"), url("./fonts/PokemonGb-RAeo.ttf") format("truetype");
+}
