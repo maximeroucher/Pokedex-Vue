@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import Pokemons from './components/Pokemons.vue'
 
 </script>
 
 <template>
   <div class="intro">
     <h1>Pokemon</h1>
-    <Pokemons />
+    <router-view />
   </div>
 </template>
 

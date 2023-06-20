@@ -1,17 +1,20 @@
 <template>
     <div class="card">
-        <!-- <Link to={{ this.pokemon. }} style={{ textDecoration: "none", color: "black" }}> -->
-        <p>{{ pokemon.name }}</p>
-        <img :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`" alt="" />
-        <p>Id: {{ pokemon.id }}</p>
-        <p>Weight: {{ poundsToKilograms(pokemon.weight) }} kg</p>
-        <p>Height: {{ decimeterToMeter(pokemon.height) }} cm</p>
-        <!-- </Link> -->
+        <RouterLink :to="`${pokemon.id}/details`" style="text-decoration: none; color: black;">
+            <p>{{ pokemon.name }}</p>
+            <img :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`"
+                alt="" />
+            <p>Id: {{ pokemon.id }}</p>
+            <p>Weight: {{ poundsToKilograms(pokemon.weight) }} kg</p>
+            <p>Height: {{ decimeterToMeter(pokemon.height) }} cm</p>
+        </RouterLink>
     </div>
 </template>
   
   
 <script lang="ts">
+import { useRoute } from 'vue-router';
+
 
 interface Props {
     id: number
@@ -20,10 +23,15 @@ interface Props {
     height: number
 }
 
+
 export default {
-    props: {
-        id: Number,
+
+    setup() {
+        const route = useRoute();
+        const pokemonId = route.params.id;
+        return { pokemonId };
     },
+
     data() {
         return {
             pokemon: {} as Props,
@@ -31,7 +39,7 @@ export default {
     },
     methods: {
         fetchData() {
-            fetch(`https://pokeapi.co/api/v2/pokemon/${this.id}`, {
+            fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`, {
                 method: "GET",
             })
                 .then((response) => {
